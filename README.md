@@ -13,3 +13,15 @@ modules:
     repo: git@github.com:jessielaf/effe
     version: master
 ```
+
+## Usage
+
+### Assemble
+```
+python -m main assemble {{ config_file }}
+```
+
+### Dissemble
+```
+python -m main assemble {{ config_file }} {{ modul_name }} {{ dissemble_destination }}
+```
