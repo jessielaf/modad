@@ -37,7 +37,7 @@ click = ">=6.5"
 toml = ">=0.9.4"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Composable command line interface toolkit"
 name = "click"
 optional = false
@@ -180,7 +180,7 @@ python-versions = ">=2.7"
 version = "0.5.2"
 
 [metadata]
-content-hash = "8b512e9c487574ac8ac19b02a4ce486e8bce95495a65d3b942b4516e0541a376"
+content-hash = "871b912af2b79a5e9f55cadea0b36f0906d140dfad718c96b12c5313c0467bd4"
 python-versions = "^3.6"
 
 [metadata.hashes]
