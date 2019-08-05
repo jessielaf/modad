@@ -1,0 +1,10 @@
+# ignored files or file extensions
+.idea
+.vscode
+__pycache__
+.pyc
+*.log
+*.pot
+
+venv
+modules
