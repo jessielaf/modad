@@ -12,26 +12,26 @@ def cli():
 
 
 @cli.command()
-@click.argument("filename")
-def assemble(filename):
+@click.option("--config", default="modad.yml")
+def assemble(config):
     """
     Assembles modular monolith
     """
 
-    with open(filename, "r") as stream:
+    with open(config, "r") as stream:
         state.config = Config(yaml.safe_load(stream))
         Assembler().run()
 
 
 @cli.command()
-@click.argument("filename")
 @click.argument("module_name")
 @click.argument("dissemble_dest")
-def dissemble(filename, module_name, dissemble_dest):
+@click.option("--config", default="modad.yml")
+def dissemble(module_name, dissemble_dest, config):
     """
     Dissembles modular monolith
     """
-    with open(filename, "r") as stream:
+    with open(config, "r") as stream:
         state.config = Config(yaml.safe_load(stream))
         Dissembler().run(module_name, dissemble_dest)
 
