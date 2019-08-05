@@ -1,10 +1,12 @@
-dest_dir:
-  effe: modules/effe
-  shift: modules/shi1
+dest:
+  - src: effe
+    dest: modules/effe
+  - src: shift
+    dest: modules/shi1
 modules:
-  employees:
+  - name: employees
     repo: git@github.com:jessielaf/effe
     version: master
-  shifts:
+  - name: shifts
     repo: git@github.com:jessielaf/effe
     version: master

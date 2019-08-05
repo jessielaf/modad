@@ -1,13 +1,15 @@
 # Monoa
-Monoa is a assembler for modular monoliths. This can be done by creating a yaml that looks like this:
+Monoa is an assembler for modular monoliths. This can be done by creating a yaml that looks like this:
+
+> This module is not usable in production!
 
 ```yaml
-dest_dir: modules
+dest: modules
 modules:
-  employees:
+  - name: employees
     repo: git@github.com:jessielaf/effe
     version: master
-  shifts:
+  - name: shifts
     repo: git@github.com:jessielaf/effe
     version: master
 ```
