@@ -1,8 +1,8 @@
 import shutil
 import tempfile
 from os import path, makedirs
-from src.state import state
-from src.utils import remove_dir, clone
+from modad.state import state
+from modad.utils import remove_dir, clone
 
 TEMP_DIR = tempfile.gettempdir()
 
@@ -19,8 +19,8 @@ class Assembler:
                 remove_dir(directory)
 
     def handle_single_destination(self):
-        for name, module in state.config.modules.items():
-            directory = f"{state.config.copy_dir}/{name}"
+        for module in state.config.modules:
+            directory = f"{state.config.dest}/{module.name}"
             remove_dir(directory)
             clone(module, directory)
 

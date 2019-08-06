@@ -8,3 +8,8 @@ __pycache__
 
 venv
 modules
+
+# Module
+build
+dist
+modad.egg-info

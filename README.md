@@ -18,12 +18,18 @@ modules:
 
 ## Usage
 
+### Install
+
+```
+python setup.py install
+```
+
 ### Assemble
 ```
-python -m main assemble {{ config_file }}
+modad assemble {{ config_file }}
 ```
 
 ### Dissemble
 ```
-python -m main assemble {{ config_file }} {{ modul_name }} {{ dissemble_destination }}
+modad dissemble {{ config_file }} {{ modul_name }} {{ dissemble_destination }}
 ```

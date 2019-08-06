@@ -1,6 +1,6 @@
 import shutil
-from src.state import state
-from src.utils import clone, remove_dir
+from modad.state import state
+from modad.utils import clone, remove_dir
 
 
 class Dissembler:

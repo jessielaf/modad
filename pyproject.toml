@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Monoc"
+name = "Modad"
 version = "0.1.0"
 description = ""
 authors = ["Jessie Liauw A Fong"]
@@ -14,3 +14,4 @@ click = "^7.0"
 [tool.poetry.dev-dependencies]
 pytest = "^3.6"
 black = {version = "^18.3-alpha.0", allows-prereleases = true}
+m2r = "^0.2.1"

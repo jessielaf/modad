@@ -1,4 +1,4 @@
-from src.parser import Config
+from modad.parser import Config
 
 
 class _State:

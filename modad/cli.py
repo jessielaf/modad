@@ -1,9 +1,9 @@
 import click
 import yaml
-from src.assembler import Assembler
-from src.dissembler import Dissembler
-from src.parser import Config
-from src.state import state
+from modad.assembler import Assembler
+from modad.dissembler import Dissembler
+from modad.parser import Config
+from modad.state import state
 
 
 @click.group()
@@ -39,5 +39,5 @@ def dissemble(module_name, dissemble_dest, config):
 cli_obj = click.CommandCollection(sources=[cli])
 
 
-if __name__ == "__main__":
+def main():
     cli()
