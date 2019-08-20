@@ -12,7 +12,7 @@ def cli():
 
 
 @cli.command()
-@click.option("--config", default="modad.yml")
+@click.option("-c", "--config", default="modad.yml")
 def assemble(config):
     """
     Assembles modular monolith
@@ -26,7 +26,7 @@ def assemble(config):
 @cli.command()
 @click.argument("module_name")
 @click.argument("dissemble_dest")
-@click.option("--config", default="modad.yml")
+@click.option("-c", "--config", default="modad.yml")
 def dissemble(module_name, dissemble_dest, config):
     """
     Dissembles modular monolith

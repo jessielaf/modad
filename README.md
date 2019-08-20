@@ -26,10 +26,15 @@ python setup.py install
 
 ### Assemble
 ```
-modad assemble {{ config_file }}
+modad assemble
 ```
 
 ### Dissemble
 ```
-modad dissemble {{ config_file }} {{ modul_name }} {{ dissemble_destination }}
+modad dissemble {{ modul_name }} {{ dissemble_destination }}
 ```
+
+### Options
+|Option|Default|Example|Description|
+|---|---|---|---|
+|`-c` or `--config`|`modad.yml`|`custom.yml`|The file in which the config is located|
