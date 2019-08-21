@@ -1,31 +1,29 @@
-from typing import Union, List
-
-from dataclasses import dataclass
+from modad.config import config, Module, Destination
 
 
-@dataclass
-class Destination:
-    src: str
-    dest: str
+class Parser:
+    """
+    Parses the config file into the config state
 
+    Attributes:
+        unparsed_config (dict): The unparsed config dictionary
+    """
 
-@dataclass
-class Module:
-    name: str
-    repo: str
-    version: str = "master"
-
-
-class Config:
-    dest: Union[str, List[Destination]]
-    modules: List[Module] = []
+    unparsed_config: dict = {}
 
     def __init__(self, config):
         self.parse_dest(config)
         self.parse_modules(config)
 
-    def parse_modules(self, config):
-        modules = config.get("modules", None)
+    def parse_modules(self, unparsed_config):
+        """
+        Parses the modules in the config
+
+        Args:
+            unparsed_config: The dictionary from the config file
+        """
+
+        modules = unparsed_config.get("modules", None)
 
         if not modules:
             raise Exception("Modules not in config")
@@ -34,20 +32,27 @@ class Config:
             raise Exception("Modules should be a list")
 
         for module in modules:
-            self.modules.append(Module(**module))
+            config.modules.append(Module(**module))
 
-    def parse_dest(self, config):
-        dest = config.get("dest", None)
+    def parse_dest(self, unparsed_config):
+        """
+        Parses the destination in the config
+
+        Args:
+            unparsed_config: The dictionary from the config file
+        """
+
+        dest = unparsed_config.get("dest", None)
 
         if not dest:
             raise Exception("Dest not in config")
 
         if isinstance(dest, str):
-            self.dest = dest
+            config.dest = dest
         elif isinstance(dest, list):
-            self.dest = []
+            config.dest = []
 
             for destination in dest:
-                self.dest.append(Destination(**destination))
+                config.dest.append(Destination(**destination))
         else:
             raise Exception("Dest should either be a list or a string")

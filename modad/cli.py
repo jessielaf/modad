@@ -2,12 +2,15 @@ import click
 import yaml
 from modad.assembler import Assembler
 from modad.dissembler import Dissembler
-from modad.parser import Config
-from modad.state import state
+from modad.parser import Parser
 
 
 @click.group()
 def cli():
+    """
+    Create cli group
+    """
+
     pass
 
 
@@ -19,7 +22,7 @@ def assemble(config):
     """
 
     with open(config, "r") as stream:
-        state.config = Config(yaml.safe_load(stream))
+        Parser(yaml.safe_load(stream))
         Assembler().run()
 
 
@@ -31,6 +34,7 @@ def dissemble(module_name, dissemble_dest, config):
     """
     Dissembles modular monolith
     """
+
     with open(config, "r") as stream:
         state.config = Config(yaml.safe_load(stream))
         Dissembler().run(module_name, dissemble_dest)
