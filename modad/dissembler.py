@@ -1,6 +1,6 @@
 import shutil
 from os import path
-from modad.state import state
+from modad.config import config
 from modad.utils import clone, remove_dir
 
 
@@ -25,12 +25,10 @@ class Dissembler:
         if path.exists(self.dissemble_dest):
             remove_dir(self.dissemble_dest)
 
-        module = next(
-            module for module in state.config.modules if module.name == module_name
-        )
+        module = next(module for module in config.modules if module.name == module_name)
         clone(module, self.dissemble_dest)
 
-        if isinstance(state.config.dest, list):
+        if isinstance(config.dest, list):
             self.handle_multiple_destinations(module)
         else:
             self.handle_single_destination(module)
@@ -43,7 +41,7 @@ class Dissembler:
             module: The module that will be dissembled
         """
 
-        shutil.move(f"{state.config.dest}/{module.name}", self.dissemble_dest)
+        shutil.move(f"{config.dest}/{module.name}", self.dissemble_dest)
 
     def handle_multiple_destinations(self, module):
         """
@@ -53,7 +51,7 @@ class Dissembler:
             module: The module that will be dissembled
         """
 
-        for destination in state.config.dest:
+        for destination in config.dest:
             directory = f"{self.dissemble_dest}/{destination.src}"
 
             remove_dir(directory)

@@ -36,7 +36,7 @@ def dissemble(module_name, dissemble_dest, config):
     """
 
     with open(config, "r") as stream:
-        state.config = Config(yaml.safe_load(stream))
+        Parser(yaml.safe_load(stream))
         Dissembler().run(module_name, dissemble_dest)
 
 
