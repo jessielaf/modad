@@ -1,3 +1,4 @@
+import json
 import shutil
 from os import path
 from modad.config import config
@@ -7,9 +8,14 @@ from modad.utils import clone, remove_dir
 class Dissembler:
     """
     This class dissembler a certain modules of the modular monolith based on the config
+
+    Attributes;
+        dissemble_dest (str): Dissemble destination for the module
+        commit_hashes (dict): Commit hashes that are cloned
     """
 
     dissemble_dest = ""
+    commit_hashes = {}
 
     def run(self, module_name, dissemble_dest):
         """
@@ -21,12 +27,14 @@ class Dissembler:
         """
 
         self.dissemble_dest = dissemble_dest
+        with open("modad.lock", "r") as file:
+            self.commit_hashes = json.loads(file.read())
 
         if path.exists(self.dissemble_dest):
             remove_dir(self.dissemble_dest)
 
         module = next(module for module in config.modules if module.name == module_name)
-        clone(module, self.dissemble_dest)
+        clone(module, self.dissemble_dest, self.commit_hashes[module.name])
 
         if isinstance(config.dest, list):
             self.handle_multiple_destinations(module)
@@ -41,7 +49,7 @@ class Dissembler:
             module: The module that will be dissembled
         """
 
-        shutil.move(f"{config.dest}/{module.name}", self.dissemble_dest)
+        shutil.move(path.join(config.dest, module.name), self.dissemble_dest)
 
     def handle_multiple_destinations(self, module):
         """
@@ -52,7 +60,7 @@ class Dissembler:
         """
 
         for destination in config.dest:
-            directory = f"{self.dissemble_dest}/{destination.src}"
+            directory = path.join(self.dissemble_dest, destination.src)
 
             remove_dir(directory)
-            shutil.move(f"{destination.dest}/{module.name}", directory)
+            shutil.move(path.join(destination.dest, module.name), directory)
