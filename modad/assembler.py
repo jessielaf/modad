@@ -9,6 +9,31 @@ from modad.utils import remove_dir, clone
 TEMP_DIR = tempfile.gettempdir()
 
 
+class Logger:
+    """
+    Logger for the assembler
+    """
+
+    @staticmethod
+    def assemble_module(module):
+        """
+        Logs when assembling a module
+
+        Args:
+            module: Module that is being assembled
+        """
+
+        print(f"Assembling module: {module.name}")
+
+    @staticmethod
+    def create_lock_file():
+        """
+        Logs when creating the lock file
+        """
+
+        print("Creating lock file")
+
+
 class Assembler:
     """
     This class assembles the modular monolith based on the config
@@ -37,6 +62,8 @@ class Assembler:
         """
 
         for module in config.modules:
+            Logger.assemble_module(module)
+
             directory = path.join(config.dest, module.name)
             remove_dir(directory)
             clone(module, directory)
@@ -54,16 +81,19 @@ class Assembler:
 
         # Clone the modules and copy the right directories
         for module in config.modules:
+            Logger.assemble_module(module)
+
             directory = path.join(TEMP_DIR, module.name)
             remove_dir(directory)
             clone(module, directory)
-
             self.commit_hashes[module.name] = self.get_commit_hash(directory)
 
             for destination in config.dest:
-                to_directory = f"{destination.dest}/{module.name}"
+                to_directory = path.join(destination.dest, module.name)
                 remove_dir(to_directory)
-                shutil.move(f"{TEMP_DIR}/{module.name}/{destination.src}", to_directory)
+                shutil.move(
+                    path.join(TEMP_DIR, module.name, destination.src), to_directory
+                )
 
     def get_commit_hash(self, directory):
         """
@@ -86,6 +116,8 @@ class Assembler:
         """
         Creates the lock file for modad
         """
+
+        Logger.create_lock_file()
 
         with open("modad.lock", "w") as file:
             file.write(json.dumps(self.commit_hashes))

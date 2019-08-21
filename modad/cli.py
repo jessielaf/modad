@@ -8,14 +8,14 @@ from modad.parser import Parser
 @click.group()
 def cli():
     """
-    Create cli group
+    Modular assembler and dissembler
     """
 
     pass
 
 
 @cli.command()
-@click.option("-c", "--config", default="modad.yml")
+@click.option("-c", "--config", default="modad.yml", help="The config location")
 def assemble(config):
     """
     Assembles modular monolith
@@ -26,13 +26,16 @@ def assemble(config):
         Assembler().run()
 
 
-@cli.command()
+@cli.command(short_help="Dissembles a module into a destination")
 @click.argument("module_name")
 @click.argument("dissemble_dest")
-@click.option("-c", "--config", default="modad.yml")
+@click.option("-c", "--config", default="modad.yml", help="The config location")
 def dissemble(module_name, dissemble_dest, config):
     """
-    Dissembles modular monolith
+    Dissembles the module with MODULE_NAME into the DISSEMBLE_DEST
+
+    MODULE_NAME: The name of the module that will be dissembled
+    DISSEMBLE_DEST: The destination in which the module will be dissembled
     """
 
     with open(config, "r") as stream:
