@@ -6,7 +6,7 @@ authors = ["Jessie Liauw A Fong"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
-pyyaml = "^5.1"
+pyyaml = "^5.4"
 gitpython = "^2.1"
 dataclasses = "^0.6.0"
 click = "^7.0"
